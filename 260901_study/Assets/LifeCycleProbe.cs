@@ -19,4 +19,19 @@ public class LifeCycleProbe : MonoBehaviour
     {
         Debug.Log("LIfeCycleProbe: Start");
     }
+
+    private void FixedUpdate()
+    {
+        Debug.Log("LifeCycleProbe: FixedUpdate");
+    }
+
+    private void Update()
+    {
+        Debug.Log("LifeCycleProbe: Update");
+    }
+
+    private void LateUpdate()
+    {
+        Debug.Log("LifeCycleProbe: LateUpdate");
+    }
 }
