@@ -22,16 +22,26 @@ public class LifeCycleProbe : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("LifeCycleProbe: FixedUpdate");
+        // Debug.Log("LifeCycleProbe: FixedUpdate");
     }
 
     private void Update()
     {
-        Debug.Log("LifeCycleProbe: Update");
+        // Debug.Log("LifeCycleProbe: Update");
     }
 
     private void LateUpdate()
     {
-        Debug.Log("LifeCycleProbe: LateUpdate");
+        // Debug.Log("LifeCycleProbe: LateUpdate");
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("LifeCycleProbe: OnDisable");
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("LifeCycleProbe: OnDestroy");
     }
 }
