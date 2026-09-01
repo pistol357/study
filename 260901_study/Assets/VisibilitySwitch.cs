@@ -25,8 +25,12 @@ public class VisibilitySwitch : MonoBehaviour
         Debug.Log($"VisibilitySwitch: 자신은 {_selfRenderer.name}입니다.");
         Debug.Log($"VisibilitySwitch: 연결된 자식은 {_childRenderer.name}입니다.");
         Debug.Log($"VisibilitySwitch: 태그로 찾은 것은 {_farRenderer.name}입니다.");
+    }
 
-        Renderer found = GetComponentInChildren<Renderer>();
-        Debug.Log($"VisibilitySwitch: GetComponentInChildren이 돌려준 것은 {found.name}입니다.");
+    private void Start()
+    {
+        _selfRenderer.enabled = _showSelf;
+        _childRenderer.enabled = _showChild;
+        _farRenderer.enabled = _showFar;
     }
 }
