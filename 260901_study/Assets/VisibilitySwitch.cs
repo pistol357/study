@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class VisibilitySwitch : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private const string TAG_FAR = "FarTarget";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private Renderer _childRenderer;
+
+    [SerializeField] private bool _showSelf = true;
+    [SerializeField] private bool _showChild = true;
+    [SerializeField] private bool _showFar = true;
 }
