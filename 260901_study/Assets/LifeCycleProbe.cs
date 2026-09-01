@@ -5,43 +5,14 @@ using UnityEngine;
 
 public class LifeCycleProbe : MonoBehaviour
 {
-    private void Awake()
-    {
-        Debug.Log("LIfeCycleProbe: Awake");
-    }
+    private void Awake() => LogStep("Awake");
+    private void OnEnable() => LogStep("OnEnable");
+    private void Start() => LogStep("Start");
+    private void OnDisable() => LogStep("OnDisable");
+    private void Ondestroy() => LogStep("Ondestroy");
 
-    private void OnEnable()
+    private void LogStep(string stepName)
     {
-        Debug.Log("LIfeCycleProbe: OnEnable");
-    }
-
-    private void Start()
-    {
-        Debug.Log("LIfeCycleProbe: Start");
-    }
-
-    private void FixedUpdate()
-    {
-        // Debug.Log("LifeCycleProbe: FixedUpdate");
-    }
-
-    private void Update()
-    {
-        // Debug.Log("LifeCycleProbe: Update");
-    }
-
-    private void LateUpdate()
-    {
-        // Debug.Log("LifeCycleProbe: LateUpdate");
-    }
-
-    private void OnDisable()
-    {
-        Debug.Log("LifeCycleProbe: OnDisable");
-    }
-
-    private void OnDestroy()
-    {
-        Debug.Log("LifeCycleProbe: OnDestroy");
+        Debug.Log($"LifeCycleProbe: {stepName}");
     }
 }
