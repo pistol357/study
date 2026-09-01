@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LifeCycleProbe : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        Debug.Log("LIfeCycleProbe: Awake");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        Debug.Log("LIfeCycleProbe: OnEnable");
+    }
+
+    private void Start()
+    {
+        Debug.Log("LIfeCycleProbe: Start");
     }
 }
