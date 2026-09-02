@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class InputProbe : MonoBehaviour
 {
-    private void Update()
+    private Renderer _renderer;
+
+    private void Awake()
     {
-        ReadKeys();
+        CacheComponents();
     }
 
-    private void ReadKeys()
+    private void Update()
+    {
+        ReadToggleKey();
+    }
+
+    private void CacheComponents()
+    {
+        _renderer = GetComponent<Renderer>();
+    }
+
+    private void ReadToggleKey()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("InputProbe: GetKeyDown");
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Debug.Log("InputProbe: GetKey");
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Debug.Log("InputProbe: GetKeyUp");
+            _renderer.enabled = !_renderer.enabled;
+            Debug.Log($"InputProbe: 보이기 상태는 {_renderer.enabled}입니다.");
         }
     }
 }
