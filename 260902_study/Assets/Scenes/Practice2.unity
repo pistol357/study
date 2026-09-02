@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: 1909395143}
   - component: {fileID: 1909395146}
   - component: {fileID: 1909395147}
+  - component: {fileID: 1909395148}
   m_Layer: 0
   m_Name: Watcher
   m_TagString: Untagged
@@ -636,6 +637,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f31b4e0413a17b46b24780a3ca31eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1909395148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909395141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93465692e00bdd48acf1ed799793253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meterPerSecond: 3
 --- !u!1 &2088009112
 GameObject:
   m_ObjectHideFlags: 0
