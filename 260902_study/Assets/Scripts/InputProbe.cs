@@ -5,6 +5,8 @@ using UnityEngine;
 public class InputProbe : MonoBehaviour
 {
     private const string AXIS_HORIZONTAL = "Horizontal";
+    private const string AXIS_MOUSE_X = "Mouse X";
+    private const string AXIS_MOUSE_Y = "Mouse Y";
     private const int MOUSE_BUTTON_LEFT = 0;
     [SerializeField] private float _amountPerSecond = 3f;
     private Renderer _renderer;
@@ -20,6 +22,7 @@ public class InputProbe : MonoBehaviour
         ReadToggleKey();
         // ReadAxes();
         ReadMouseButton();
+        ReadMouseDelta();
     }
 
     private void CacheComponents()
@@ -49,5 +52,12 @@ public class InputProbe : MonoBehaviour
         {
             Debug.Log($"InputProbe: 좌표는 {Input.mousePosition}입니다.");
         }
+    }
+
+    private void ReadMouseDelta()
+    {
+        float mouseX = Input.GetAxis(AXIS_MOUSE_X);
+        float mouseY = Input.GetAxis(AXIS_MOUSE_Y);
+        Debug.Log($"InputProbe: 마우스가 가로 {mouseX}, 세로 {mouseY}만큼 움직였습니다.");
     }
 }
