@@ -5,7 +5,9 @@ using UnityEngine;
 public class InputProbe : MonoBehaviour
 {
     private const string AXIS_HORIZONTAL = "Horizontal";
+    [SerializeField] private float _amountPerSecond = 3f;
     private Renderer _renderer;
+    private float _total;
 
     private void Awake()
     {
@@ -34,8 +36,8 @@ public class InputProbe : MonoBehaviour
 
     private void ReadAxes()
     {
-        float smoothed = Input.GetAxis(AXIS_HORIZONTAL);
         float raw = Input.GetAxisRaw(AXIS_HORIZONTAL);
-        Debug.Log($"InputProbe: GetAxis는 {smoothed}, GetAxisRaw는 {raw}입니다.");
+        _total += raw * _amountPerSecond * Time.deltaTime;
+        Debug.Log($"InputProbe: 누적값은 {_total}입니다.");
     }
 }
