@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputProbe : MonoBehaviour
 {
     private const string AXIS_HORIZONTAL = "Horizontal";
+    private const int MOUSE_BUTTON_LEFT = 0;
     [SerializeField] private float _amountPerSecond = 3f;
     private Renderer _renderer;
     private float _total;
@@ -17,7 +18,8 @@ public class InputProbe : MonoBehaviour
     private void Update()
     {
         ReadToggleKey();
-        ReadAxes();
+        // ReadAxes();
+        ReadMouseButton();
     }
 
     private void CacheComponents()
@@ -39,5 +41,13 @@ public class InputProbe : MonoBehaviour
         float raw = Input.GetAxisRaw(AXIS_HORIZONTAL);
         _total += raw * _amountPerSecond * Time.deltaTime;
         Debug.Log($"InputProbe: 누적값은 {_total}입니다.");
+    }
+
+    private void ReadMouseButton()
+    {
+        if (Input.GetMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            Debug.Log($"InputProbe: 좌표는 {Input.mousePosition}입니다.");
+        }
     }
 }
