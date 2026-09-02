@@ -13,12 +13,13 @@ public class AxisMover : MonoBehaviour
 
     private void Awake()
     {
-        
+        CacheStart();
     }
 
     private void Update()
     {
-
+        Move();
+        ReportOnce();
     }
 
     private void CacheStart()
@@ -28,7 +29,7 @@ public class AxisMover : MonoBehaviour
 
     private void Move()
     {
-        transform.position += _direction * _meterPerSecond * Time.deltaTime;
+        transform.position += _direction.normalized * _meterPerSecond * Time.deltaTime;
     }
 
     private void ReportOnce()
