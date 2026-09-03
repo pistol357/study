@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerPrefab: {fileID: 1972649497309233358, guid: a6ecf9419c922a44bae0f5e17dcf9272, type: 3}
+  _spawnRoot: {fileID: 1255724852}
 --- !u!1 &1068674564
 GameObject:
   m_ObjectHideFlags: 0
