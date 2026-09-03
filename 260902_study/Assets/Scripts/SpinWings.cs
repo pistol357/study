@@ -1,11 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SpinWings : MonoBehaviour
 {
     [SerializeField] private GameObject _helicopter;
     [SerializeField] private float _spinSpeed;
+    public float SpinSpeed
+    {
+        get
+        {
+            return _spinSpeed;
+        }
+
+        set
+        {
+            _spinSpeed = value;
+            if(_spinSpeed > 2000)
+            {
+                _spinSpeed = 2000;
+            }
+            else if(_spinSpeed < 0)
+            {
+                _spinSpeed = 0;
+            }
+        }
+    }
+    [SerializeField] private float _takeoffSpeed;
 
     private void Update()
     {
@@ -18,7 +40,12 @@ public class SpinWings : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            _spinSpeed++;
+            SpinSpeed++;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            SpinSpeed--;
         }
     }
 
@@ -29,11 +56,17 @@ public class SpinWings : MonoBehaviour
 
     private void Fly()
     {
-        if(_spinSpeed >= 1000)
+        if(1000 <= _spinSpeed && _spinSpeed <= 2000)
         {
             Vector3 position = _helicopter.transform.position;
             position.y = _spinSpeed / 100;
-            _helicopter.transform.position = position;
+            _helicopter.transform.position = Vector3.MoveTowards(_helicopter.transform.position, position, _takeoffSpeed * Time.deltaTime);
+        }
+        else if(_spinSpeed < 1000)
+        {
+            Vector3 position = _helicopter.transform.position;
+            position.y = 0;
+            _helicopter.transform.position = Vector3.MoveTowards(_helicopter.transform.position, position, _takeoffSpeed * Time.deltaTime);
         }
     }
 }
