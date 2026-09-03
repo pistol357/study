@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _towerPrefab;
+    private int _count;
 
     private void Update()
     {
@@ -21,7 +22,9 @@ public class TowerSpawner : MonoBehaviour
 
     private void SpawnOne()
     {
-        Instantiate(_towerPrefab);
-        Debug.Log("TowerSpawner: 하나 만들었습니다.");
+        Vector3 spawnPosition = new Vector3(_count * 2f, 0f, 0f);
+        Instantiate(_towerPrefab, spawnPosition, Quaternion.identity);
+        _count += 1;
+        Debug.Log($"TowerSpawner: {_count}번째를 만들었습니다.");
     }
 }
