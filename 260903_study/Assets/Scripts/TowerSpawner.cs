@@ -25,6 +25,7 @@ public class TowerSpawner : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(_count * 2f, 0f, 0f);
         GameObject clone = Instantiate(_towerPrefab, spawnPosition, Quaternion.identity, _spawnRoot);
+        clone.AddComponent<TowerLifeLog>();
         Destroy(clone, 2f);
         _count += 1;
         Debug.Log($"TowerSpawner: {_count}번째를 만들었고 2초 뒤에 없앱니다.");
