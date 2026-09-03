@@ -11,6 +11,11 @@ public class HelicopterController : MonoBehaviour
         
     }
 
+    private void ReadKey()
+    {
+
+    }
+
     private void Move()
     {
 
