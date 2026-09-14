@@ -20,37 +20,13 @@ public class PlayerWeapon : MonoBehaviour
     private bool _isPressedReload => Input.GetKey(_reloadKey);
     private float _currentCooldown;
     private float _cooldownBonus = 0;
-
-    public int MaxBullet
-    {
-        get
-        {
-            return _maxBullet;
-        }
-    }
-
-    private bool _isReadyToFire
-    {
-        get
-        {
-            return _currentCooldown >= FinalCooldown;
-        }
-    }
-
-    public float FinalCooldown
-    {
-        get
-        {
-            return _cooldown * (1 - _cooldownBonus);
-        }
-    }
+    public int MaxBullet => _maxBullet;
+    private bool _isReadyToFire => _currentCooldown >= FinalCooldown;
+    public float FinalCooldown => _cooldown * (1 - _cooldownBonus);
 
     public float CooldownBonus
     {
-        get
-        {
-            return _cooldownBonus;
-        }
+        get => _cooldownBonus;
 
         set
         {
@@ -63,15 +39,9 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        CacheComponents();
-    }
+    private void Awake() => CacheComponents();
 
-    private void Start()
-    {
-        Init();
-    }
+    private void Start() => Init();
 
     private void Update()
     {
@@ -86,10 +56,7 @@ public class PlayerWeapon : MonoBehaviour
         _currentCooldown += Time.deltaTime;
     }
 
-    public void ResetCooldownBonus()
-    {
-        _cooldownBonus = 0;
-    }
+    public void ResetCooldownBonus() => _cooldownBonus = 0;
 
     public void Fire()
     {
@@ -123,10 +90,7 @@ public class PlayerWeapon : MonoBehaviour
         effectTransform.forward = hit.normal;
     }
 
-    public void Reload()
-    {
-        HasBullet.Value = _maxBullet;
-    }
+    public void Reload() => HasBullet.Value = _maxBullet;
 
     private void ReadReloadInput()
     {
@@ -151,13 +115,7 @@ public class PlayerWeapon : MonoBehaviour
         return damageable;
     }
 
-    private void CacheComponents()
-    {
-        _cameraTransform = Camera.main.transform;
-    }
+    private void CacheComponents() => _cameraTransform = Camera.main.transform;
 
-    private void Init()
-    {
-        Reload();
-    }
+    private void Init() => Reload();
 }
