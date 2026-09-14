@@ -26,7 +26,7 @@ public class TurretTargetDetectController : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other) => _playerTransform = null;
-
+    
     public Transform GetCollider() => _playerTransform;
 
     public bool RayShotToPlayer()
@@ -48,7 +48,7 @@ public class TurretTargetDetectController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, _sphereCollider.radius, _layerMask))
         {
-            if (hit.transform.CompareTag("Player"))
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 _isPlayerInSight = true;
             }
