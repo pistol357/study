@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1233136503421055082}
   - component: {fileID: 5838771877400807568}
   - component: {fileID: 4080173017695422100}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TargetDetectRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,13 +7,10 @@ public class TurretTargetDetectController : MonoBehaviour
     private Transform _playerTransform;
     private TurretController _turret;
     private SphereCollider _sphereCollider;
-    private LayerMask _layerMask;
     private bool _isPlayerInTrigger => _playerTransform != null;
     private bool _isPlayerInSight = false;
 
     private void Awake() => CacheComponents();
-
-    private void Start() => Init();
 
     private void Update() => RayShotToPlayer();
 
@@ -46,7 +43,7 @@ public class TurretTargetDetectController : MonoBehaviour
         Ray ray = new Ray(from, (to - from).normalized);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, _sphereCollider.radius, _layerMask))
+        if (Physics.Raycast(ray, out hit, _sphereCollider.radius))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
@@ -61,11 +58,5 @@ public class TurretTargetDetectController : MonoBehaviour
     {
         _turret = GetComponentInParent<TurretController>();
         _sphereCollider = GetComponent<SphereCollider>();
-    }
-
-    private void Init()
-    {
-        _layerMask = _layerMask.Everything();
-        _layerMask = _layerMask.Remove(LayerMask.NameToLayer("Bullet"));
     }
 }
