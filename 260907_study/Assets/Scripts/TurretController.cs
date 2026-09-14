@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour, IDamageable
 {
+    [SerializeField] private string _name;
     [SerializeField] private int _maxHp;
     [SerializeField] private float _rotateSpeed;
     [SerializeField] private float _cooldown;
@@ -24,6 +25,7 @@ public class TurretController : MonoBehaviour, IDamageable
     private bool _isReadyToFire => _currentCooldown >= _cooldown;
     public GameObject GameObject => gameObject;
     public Transform MuzzlePoint => _muzzlePoint;
+    public string Name => _name;
     public int MaxHp => _maxHp;
 
     public int Hp
