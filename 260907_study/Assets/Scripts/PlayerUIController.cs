@@ -13,33 +13,32 @@ public class PlayerUIController : MonoBehaviour
     private PlayerWeapon _weapon;
     private PlayerGrenade _grenade;
 
-    private void Awake()
-    {
-        CacheComponents();
-    }
+    private void Awake() => CacheComponents();
 
-    private void Update()
+    private void OnEnable() => BindPlayerUIEvent();
+
+    private void BindPlayerUIEvent()
     {
-        UpdateBulletUI();
-        UpdateGrenadeCountUI();
-        UpdateGrenadeChargeUI();
+        _weapon.HasBullet.AddListener(UpdateBulletUI);
+        _grenade.HasGrenadeCount.AddListener(UpdateGrenadeCountUI);
+        _grenade.ThrowPower.AddListener(UpdateGrenadeChargeUI);
     }
 
     private void UpdateBulletUI()
     {
-        _bullet.text = $"{_weapon.HasBullet} / {_weapon.MaxBullet}";
+        _bullet.text = $"{_weapon.HasBullet.Value} / {_weapon.MaxBullet}";
     }
 
     private void UpdateGrenadeCountUI()
     {
-        _grenadeCount.text = $"{_grenade.HasGrenadeCount} / {_grenade.MaxGrenadeCount}";
+        _grenadeCount.text = $"{_grenade.HasGrenadeCount.Value} / {_grenade.MaxGrenadeCount}";
     }
 
     private void UpdateGrenadeChargeUI()
     {
-        if(_grenade.ThrowPower >= _grenade.MaxThrowPower / 2)
+        if(_grenade.ThrowPower.Value >= _grenade.MaxThrowPower / 2)
         {
-            _grenadeCharge.text = $"{(int)(_grenade.ThrowPower) - (int)(_grenade.MaxThrowPower / 2)} / {(int)(_grenade.MaxThrowPower / 2)}";
+            _grenadeCharge.text = $"{(int)(_grenade.ThrowPower.Value) - (int)(_grenade.MaxThrowPower / 2)} / {(int)(_grenade.MaxThrowPower / 2)}";
         }
         else
         {

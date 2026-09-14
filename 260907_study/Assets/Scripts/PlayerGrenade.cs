@@ -11,43 +11,18 @@ public class PlayerGrenade : MonoBehaviour
     [Header("Grenade")]
     [SerializeField] private GrenadeController _grenadePrefab;
     [SerializeField] private int _maxGrenadeCount;
-    
-    private int _hasGrenadeCount;
+
+    public ObservableProperty<int> HasGrenadeCount = new(0);
+    public ObservableProperty<float> ThrowPower = new(0);
     private bool _isPressedGrenadeKey => Input.GetKey(_grenadeKey);
     private bool _isReleasedGrenadeKey => Input.GetKeyUp(_grenadeKey);
-    private bool _canThrowGrenade => _hasGrenadeCount > 0;
-    private float _throwPower;
+    private bool _canThrowGrenade => HasGrenadeCount.Value > 0;
 
     public int MaxGrenadeCount
     {
         get
         {
             return _maxGrenadeCount;
-        }
-    }
-
-    public int HasGrenadeCount
-    {
-        get
-        {
-            return _hasGrenadeCount;
-        }
-    }
-
-    public float ThrowPower
-    {
-        get
-        {
-            return _throwPower;
-        }
-
-        set
-        {
-            _throwPower = value;
-            if(_throwPower > _maxThrowPower)
-            {
-                _throwPower = _maxThrowPower;
-            }
         }
     }
 
@@ -68,20 +43,20 @@ public class PlayerGrenade : MonoBehaviour
     {
         if (!_canThrowGrenade) return;
 
-        if (_throwPower >= _maxThrowPower || _isReleasedGrenadeKey)
+        if (ThrowPower.Value >= _maxThrowPower || _isReleasedGrenadeKey)
         {
             ThrowGrenade();
-            _throwPower = 0;
+            ThrowPower.Value = 0;
         }
 
         if (!_isPressedGrenadeKey) return;
 
-        _throwPower += Time.deltaTime * _maxThrowPower;
+        ThrowPower.Value += Time.deltaTime * _maxThrowPower;
     }
 
     private void ThrowGrenade()
     {
-        if (_throwPower >= _maxThrowPower / 2)
+        if (ThrowPower.Value >= _maxThrowPower / 2)
         {
             GrenadeController grenade = Instantiate(
             _grenadePrefab,
@@ -89,14 +64,15 @@ public class PlayerGrenade : MonoBehaviour
             transform.rotation
             );
 
-            Vector3 newVelocity = grenade.transform.forward * _throwPower;
+            Vector3 newVelocity = grenade.transform.forward * ThrowPower.Value;
             grenade.GetComponentInParent<Rigidbody>().velocity = newVelocity;
-            _hasGrenadeCount--;
+            HasGrenadeCount.Value--;
         }
     }
 
     private void Init()
     {
-        _hasGrenadeCount = _maxGrenadeCount;
+        HasGrenadeCount.Value = _maxGrenadeCount;
+        ThrowPower.Value = 0;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
@@ -13,11 +14,11 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private FlameEffect _flameEffect;
     [SerializeField] private FlameEffect _bulletImpactEffectPrefab;
 
+    public ObservableProperty<int> HasBullet = new(0);
     private Transform _cameraTransform;
     private bool _isPressedFire => Input.GetKey(_fireKey);
     private bool _isPressedReload => Input.GetKey(_reloadKey);
     private float _currentCooldown;
-    private int _hasBullet;
     private float _cooldownBonus = 0;
 
     public int MaxBullet
@@ -25,14 +26,6 @@ public class PlayerWeapon : MonoBehaviour
         get
         {
             return _maxBullet;
-        }
-    }
-
-    public int HasBullet
-    {
-        get
-        {
-            return _hasBullet;
         }
     }
 
@@ -75,6 +68,11 @@ public class PlayerWeapon : MonoBehaviour
         CacheComponents();
     }
 
+    private void Start()
+    {
+        Init();
+    }
+
     private void Update()
     {
         UpdateCurrentCooldown();
@@ -96,13 +94,13 @@ public class PlayerWeapon : MonoBehaviour
     public void Fire()
     {
         if (!_isReadyToFire || !_isPressedFire) return;
-        if (_hasBullet <= 0)
+        if (HasBullet.Value <= 0)
         {
             return;
         }
 
         _currentCooldown = 0f;
-        _hasBullet--;
+        HasBullet.Value--;
         PlayFlameEffect();
 
         IDamageable damageable = GetDamageable();
@@ -127,7 +125,7 @@ public class PlayerWeapon : MonoBehaviour
 
     public void Reload()
     {
-        _hasBullet = _maxBullet;
+        HasBullet.Value = _maxBullet;
     }
 
     private void ReadReloadInput()
@@ -156,6 +154,10 @@ public class PlayerWeapon : MonoBehaviour
     private void CacheComponents()
     {
         _cameraTransform = Camera.main.transform;
+    }
+
+    private void Init()
+    {
         Reload();
     }
 }
