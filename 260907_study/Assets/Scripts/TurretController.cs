@@ -17,7 +17,7 @@ public class TurretController : MonoBehaviour, IDamageable
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _bulletDestroyDelay;
 
-    private int _hp;
+    public ObservableProperty<int> Hp = new(0);
     private float _currentCooldown;
     private Transform _playerTransform => _detectRange.GetCollider();
     private TurretTargetDetectController _detectRange;
@@ -27,29 +27,6 @@ public class TurretController : MonoBehaviour, IDamageable
     public Transform MuzzlePoint => _muzzlePoint;
     public string Name => _name;
     public int MaxHp => _maxHp;
-
-    public int Hp
-    {
-        get
-        {
-            return _hp;
-        }
-
-        set
-        {
-            _hp = value;
-
-            if (_hp > _maxHp)
-            {
-                _hp = _maxHp;
-            }
-            
-            if(_hp < 0)
-            {
-                _hp = 0;
-            }
-        }
-    }
 
     private void Awake() => CacheComponents();
 
@@ -103,13 +80,13 @@ public class TurretController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        Hp -= damage;
-        if(_hp <= 0)
+        Hp.Value -= damage;
+        if(Hp.Value <= 0)
         {
             Destroy(transform.gameObject);
         }
     }
 
     private void CacheComponents() => _detectRange = GetComponentInChildren<TurretTargetDetectController>();
-    private void Init() => _hp = _maxHp;
+    private void Init() => Hp.Value = _maxHp;
 }

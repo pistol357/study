@@ -15,17 +15,23 @@ public class TurretUIController : MonoBehaviour
 
     private void Awake() => CacheComponents();
 
+    private void OnEnable() => BindTurretUIEvent();
+
     private void Update()
     {
-        UpdateUI();
         SetUITransform();
+    }
+
+    private void BindTurretUIEvent()
+    {
+        _turret.Hp.AddListener(UpdateUI);
     }
 
     private void UpdateUI()
     {
         _nameText.text = $"{_turret.Name}";
-        _hpText.text = $"{_turret.Hp} / {_turret.MaxHp}";
-        _hpImage.fillAmount = (float)_turret.Hp / _turret.MaxHp;
+        _hpText.text = $"{_turret.Hp.Value} / {_turret.MaxHp}";
+        _hpImage.fillAmount = (float)_turret.Hp.Value / _turret.MaxHp;
     }
 
     private void SetUITransform() => transform.rotation = _player.CameraPivot.rotation;
