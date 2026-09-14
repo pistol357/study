@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class GrenadeController : MonoBehaviour
 {
-    public void SetData()
-    {
-
-    }
+    
 }
