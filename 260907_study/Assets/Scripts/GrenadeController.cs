@@ -1,35 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SubsystemsImplementation;
 
-public class GrenadeController : MonoBehaviour
+public class GrenadeController : MonoBehaviour, IPoolable
 {
-    private float _delay;
-    private int _damage;
-    private float _elapsedTime;
-    private bool _isTimeUp => _elapsedTime >= _delay;
+    [SerializeField] private float _delay;
+    [SerializeField] private float _range;
+    [SerializeField] private int _damage;
 
-    private void Update()
+    public ObjectPool Pool { get; set; }
+    public Transform tr { get; }
+    private WaitForSeconds _wait;
+    public float Delay
     {
-        UpdateElapsedTime();
-        Explosion();
+        get => _delay;
+
+        set
+        {
+            _delay = value;
+        }
     }
 
-    private void UpdateElapsedTime()
+    private void Awake()
     {
-        _elapsedTime += Time.deltaTime;
+        new WaitForSeconds(Delay);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(ExplosionRoutine());
+    }
+
+    private IEnumerator ExplosionRoutine()
+    {
+        yield return _wait;
+        Explosion();
     }
 
     private void Explosion()
     {
-        if (!_isTimeUp) return;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _range);
 
+        foreach (Collider collider in colliders)
+        {
+            IDamageable damageable = collider.GetComponent<IDamageable>();
 
+            if (damageable != null)
+            {
+                damageable.TakeDamage(_damage);
+            }
+        }
+
+        ReturnToPool();
     }
 
-    public void SetData(float delay, int damage)
+    public void ReturnToPool()
     {
-        _delay = delay;
-        _damage = damage;
+        Pool.Return(this);
     }
 }

@@ -1,58 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2510828283843350476
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3723174682393163990}
-  - component: {fileID: 1673113419811278968}
-  m_Layer: 2
-  m_Name: ExplosionRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3723174682393163990
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2510828283843350476}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.027264817, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2765849610115272313}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1673113419811278968
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2510828283843350476}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7517636497816923861
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +36,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1387221466762186847}
-  - {fileID: 3723174682393163990}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3538161662145631929
@@ -154,6 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00432a6d5ce858429115b9b2a31a7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _delay: 0
+  _range: 0
+  _damage: 0
 --- !u!54 &-4986320187597428407
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -214,6 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00432a6d5ce858429115b9b2a31a7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _delay: 3
+  _range: 5
+  _damage: 50
 --- !u!1 &7915214533468901425
 GameObject:
   m_ObjectHideFlags: 0
