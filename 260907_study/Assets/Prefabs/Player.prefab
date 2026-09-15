@@ -48,6 +48,8 @@ MonoBehaviour:
   _maxThrowPower: 10
   _grenadePrefab: {fileID: 2021457227910629573, guid: fd055f84b04a2d448a68592e83abfddf, type: 3}
   _maxGrenadeCount: 3
+  _explosionDelay: 3
+  _damage: 50
 --- !u!1 &3427713367181951247
 GameObject:
   m_ObjectHideFlags: 0

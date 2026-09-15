@@ -11,6 +11,8 @@ public class PlayerGrenade : MonoBehaviour
     [Header("Grenade")]
     [SerializeField] private GrenadeController _grenadePrefab;
     [SerializeField] private int _maxGrenadeCount;
+    [SerializeField] private float _explosionDelay;
+    [SerializeField] private int _damage;
 
     public ObservableProperty<int> HasGrenadeCount = new(0);
     public ObservableProperty<float> ThrowPower = new(0);
@@ -66,6 +68,7 @@ public class PlayerGrenade : MonoBehaviour
 
             Vector3 newVelocity = grenade.transform.forward * ThrowPower.Value;
             grenade.GetComponentInParent<Rigidbody>().velocity = newVelocity;
+            grenade.SetData(_explosionDelay, _damage);
             HasGrenadeCount.Value--;
         }
     }
