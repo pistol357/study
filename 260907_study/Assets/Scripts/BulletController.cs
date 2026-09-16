@@ -11,7 +11,8 @@ public class BulletController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("죽어라");
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            damageable?.TakeDamage(_damage);
         }
 
         Destroy(gameObject);
