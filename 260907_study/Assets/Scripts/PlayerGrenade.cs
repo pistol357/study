@@ -16,6 +16,7 @@ public class PlayerGrenade : MonoBehaviour
     public ObservableProperty<float> ThrowPower = new(0);
     private bool _isPressedGrenadeKey => Input.GetKey(_grenadeKey);
     private bool _isReleasedGrenadeKey => Input.GetKeyUp(_grenadeKey);
+    private float _enoughPower => MaxThrowPower / 2;
     private bool _canThrowGrenade => HasGrenadeCount.Value > 0;
     public int MaxGrenadeCount => _maxGrenadeCount;
     public float MaxThrowPower => _maxThrowPower;
@@ -24,35 +25,32 @@ public class PlayerGrenade : MonoBehaviour
 
     public void ThrowReady()
     {
-        if (!_canThrowGrenade) return;
-
-        if (ThrowPower.Value >= _maxThrowPower || _isReleasedGrenadeKey)
-        {
-            ThrowGrenade();
-            ThrowPower.Value = 0;
-        }
-
-        if (!_isPressedGrenadeKey) return;
+        if (!_canThrowGrenade || !_isPressedGrenadeKey) return;
 
         ThrowPower.Value += Time.deltaTime * _maxThrowPower;
+        ThrowPower.Value = Mathf.Clamp(ThrowPower.Value, 0f, MaxThrowPower);
     }
 
-    private void ThrowGrenade()
+    public void ThrowGrenade()
     {
-        if (ThrowPower.Value >= _maxThrowPower / 2)
+        if (!_isReleasedGrenadeKey) return;
+
+        if (ThrowPower.Value >= _enoughPower)
         {
             IPoolable grenade = _grenadePool.Take();
-            Debug.Log(grenade);
 
-            grenade.tr.position = this.transform.position;
-            Debug.Log($"{grenade} / {transform}");
+            grenade.tr.position = transform.position + transform.forward;
             grenade.tr.rotation = transform.rotation;
 
             Vector3 newVelocity = grenade.tr.forward * ThrowPower.Value;
-            grenade.tr.GetComponentInParent<Rigidbody>().velocity = newVelocity;
+            grenade.tr.GetComponent<Rigidbody>().velocity = newVelocity;
             grenade.tr.gameObject.SetActive(true);
+            ((GrenadeController)grenade).Body.SetActive(true);
+            ((GrenadeController)grenade).Effect.SetActive(false);
             HasGrenadeCount.Value--;
         }
+
+        ThrowPower.Value = 0;
     }
 
     private void Init()

@@ -14519,7 +14519,7 @@ GameObject:
   - component: {fileID: 400006}
   - component: {fileID: 19800006}
   - component: {fileID: 19900006}
-  - component: {fileID: 11400000}
+  - component: {fileID: 3654523942043009383}
   m_Layer: 0
   m_Name: WFX_ExplosiveSmoke
   m_TagString: Untagged
@@ -19316,7 +19316,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &11400000
+--- !u!114 &3654523942043009383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

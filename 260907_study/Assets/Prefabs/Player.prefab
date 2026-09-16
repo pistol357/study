@@ -44,13 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9feb847fa10156044a652a4e6dc47031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _grenadePool: {fileID: 0}
   _grenadeKey: 51
   _maxThrowPower: 10
-  _grenadePrefab: {fileID: 2021457227910629573, guid: fd055f84b04a2d448a68592e83abfddf, type: 3}
   _maxGrenadeCount: 3
-  _explosionDelay: 3
-  _range: 5
-  _damage: 50
 --- !u!1 &3427713367181951247
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5439a21a916996e46a915430101a857d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHp: 500
   _cameraPivot: {fileID: 2618570448357090134}
   _detectionRange: 4
   _interactionKey: 101

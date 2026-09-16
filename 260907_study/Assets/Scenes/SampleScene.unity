@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a84c2aebb856f24aa84eab1267ed935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grenadePrefab: {fileID: 7517636497816923861, guid: fd055f84b04a2d448a68592e83abfddf, type: 3}
+  _grenadePrefab: {fileID: 6276991061514126257, guid: e079e193ce18fd14783c6a7d155242c3, type: 3}
   <Size>k__BackingField: 3
 --- !u!1 &417686717
 GameObject:
@@ -1148,7 +1148,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3216579825125446628, guid: fc5a676d2c90b3d4f8a22e369c35950d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2138296469}
   m_SourcePrefab: {fileID: 100100000, guid: fc5a676d2c90b3d4f8a22e369c35950d, type: 3}
 --- !u!1001 &1859333424
 PrefabInstance:
@@ -1336,6 +1339,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d5785be117840249abfae440b0459c2, type: 3}
+--- !u!1 &2138296464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3216579825125446628, guid: fc5a676d2c90b3d4f8a22e369c35950d, type: 3}
+  m_PrefabInstance: {fileID: 1816582268}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &2138296469
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138296464}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2922186828119866205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1400,6 +1435,10 @@ PrefabInstance:
       propertyPath: _grenadeCharge
       value: 
       objectReference: {fileID: 89195728}
+    - target: {fileID: 6810914779092898612, guid: 83cdc6c7939ef1f43a28dc325b27655b, type: 3}
+      propertyPath: _maxHp
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 8095884520357828837, guid: 83cdc6c7939ef1f43a28dc325b27655b, type: 3}
       propertyPath: m_Name
       value: Player

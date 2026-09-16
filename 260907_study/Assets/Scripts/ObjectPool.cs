@@ -19,7 +19,6 @@ public class ObjectPool : MonoBehaviour
         set
         {
             _count = value;
-            Debug.Log($"Count 변경됨 : {value}");
         }
     }
 
