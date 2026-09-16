@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class PlayerUIController : MonoBehaviour
 {
+    [SerializeField] private Image _hpImage;
+    [SerializeField] private TextMeshProUGUI _hpText;
     [SerializeField] private TextMeshProUGUI _bullet;
     [SerializeField] private TextMeshProUGUI _grenadeCount;
     [SerializeField] private TextMeshProUGUI _grenadeCharge;
 
+    private PlayerController _player;
     private PlayerWeapon _weapon;
     private PlayerGrenade _grenade;
 
@@ -19,9 +22,16 @@ public class PlayerUIController : MonoBehaviour
 
     private void BindPlayerUIEvent()
     {
+        _player.Hp.AddListener(UpdateHpUI);
         _weapon.HasBullet.AddListener(UpdateBulletUI);
         _grenade.HasGrenadeCount.AddListener(UpdateGrenadeCountUI);
         _grenade.ThrowPower.AddListener(UpdateGrenadeChargeUI);
+    }
+
+    private void UpdateHpUI()
+    {
+        _hpImage.fillAmount = (float)_player.Hp.Value / _player.MaxHp;
+        _hpText.text = $"{_player.Hp.Value} / {_player.MaxHp}";
     }
 
     private void UpdateBulletUI()
@@ -48,6 +58,7 @@ public class PlayerUIController : MonoBehaviour
 
     private void CacheComponents()
     {
+        _player = GetComponent<PlayerController>();
         _weapon = GetComponentInChildren<PlayerWeapon>();
         _grenade = GetComponentInChildren<PlayerGrenade>();
     }

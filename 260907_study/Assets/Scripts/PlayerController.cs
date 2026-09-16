@@ -1,15 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class PlayerController : MonoBehaviour, IInteractor
+public class PlayerController : MonoBehaviour, IInteractor, IDamageable
 {
+    [SerializeField] private int _maxHp;
     [SerializeField] private Transform _cameraPivot;
     [SerializeField] private float _detectionRange;
     [SerializeField] private KeyCode _interactionKey = KeyCode.E;
     [SerializeField] private List<ItemBox> _usingItems;
 
+    public ObservableProperty<int> Hp = new(0);
+    public int MaxHp => _maxHp;
     private PlayerWeapon _weapon;
     private PlayerGrenade _grenade;
     private PlayerMovement _movement;
@@ -20,29 +24,17 @@ public class PlayerController : MonoBehaviour, IInteractor
     private bool _canInteraction => _hasDetectInteractable && _isPressedInteractionKey;
     private bool _isUsingItem;
     public Transform CameraPivot => _cameraPivot;
+    public GameObject GameObject => gameObject;
 
-    public GameObject GameObject
-    {
-        get
-        {
-            return gameObject;
-        }
-    }
-
-    private void Awake()
-    {
-        CacheComponents();
-    }
+    private void Awake() => CacheComponents();
 
     private void Start()
     {
+        Init();
         LockCursor();
     }
 
-    private void FixedUpdate()
-    {
-        _movement.Move();
-    }
+    private void FixedUpdate() => _movement.Move();
 
     private void Update()
     {
@@ -50,6 +42,7 @@ public class PlayerController : MonoBehaviour, IInteractor
         _movement.Rotate();
         _weapon.Fire();
         _grenade.ThrowReady();
+        _grenade.ThrowGrenade();
         DetectInteractable();
         TryInteract();
         UpdateItemTime();
@@ -99,9 +92,6 @@ public class PlayerController : MonoBehaviour, IInteractor
             _cameraPivot.position,
             _cameraPivot.rotation
             );
-
-        // _cameraTransform.position = _cameraPivot.position;
-        // _cameraTransform.rotation = _cameraPivot.rotation;
     }
 
     public void DetectInteractable()
@@ -194,5 +184,15 @@ public class PlayerController : MonoBehaviour, IInteractor
         {
             _isUsingItem = false;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Hp.Value -= damage;
+    }
+
+    private void Init()
+    {
+        Hp.Value = _maxHp;
     }
 }
