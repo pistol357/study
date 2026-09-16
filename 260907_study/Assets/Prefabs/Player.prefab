@@ -362,9 +362,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1b184bc20788e478c3fc5e3409c214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hpImage: {fileID: 0}
+  _hpText: {fileID: 0}
   _bullet: {fileID: 0}
   _grenadeCount: {fileID: 0}
   _grenadeCharge: {fileID: 0}
+  _gameOver: {fileID: 0}
 --- !u!1001 &571699354047387350
 PrefabInstance:
   m_ObjectHideFlags: 0

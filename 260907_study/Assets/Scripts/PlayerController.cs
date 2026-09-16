@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
     [SerializeField] private KeyCode _interactionKey = KeyCode.E;
     [SerializeField] private List<ItemBox> _usingItems;
 
-    public ObservableProperty<int> Hp = new(0);
+    public ObservablHealthProperty Hp = new(0);
     public int MaxHp => _maxHp;
     private PlayerWeapon _weapon;
     private PlayerGrenade _grenade;
@@ -28,11 +28,7 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
 
     private void Awake() => CacheComponents();
 
-    private void Start()
-    {
-        Init();
-        LockCursor();
-    }
+    private void Start() => Init();
 
     private void FixedUpdate() => _movement.Move();
 
@@ -62,12 +58,6 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
         _weapon = GetComponentInChildren<PlayerWeapon>();
         _grenade = GetComponentInChildren<PlayerGrenade>();
         _cameraTransform = Camera.main.transform;
-    }
-
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void SetWeaponTransform()
@@ -189,6 +179,10 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
     public void TakeDamage(int damage)
     {
         Hp.Value -= damage;
+    }
+
+    private void GameOver()
+    {
     }
 
     private void Init()

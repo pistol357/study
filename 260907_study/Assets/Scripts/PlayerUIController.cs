@@ -11,6 +11,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _bullet;
     [SerializeField] private TextMeshProUGUI _grenadeCount;
     [SerializeField] private TextMeshProUGUI _grenadeCharge;
+    [SerializeField] private GameObject _gameOverUI;
 
     private PlayerController _player;
     private PlayerWeapon _weapon;
@@ -32,6 +33,12 @@ public class PlayerUIController : MonoBehaviour
     {
         _hpImage.fillAmount = (float)_player.Hp.Value / _player.MaxHp;
         _hpText.text = $"{_player.Hp.Value} / {_player.MaxHp}";
+    }
+
+    private void ShowGameOverUI()
+    {
+        if (_player.Hp.Value > 0) _gameOverUI.SetActive(false);
+        else _gameOverUI.SetActive(true);
     }
 
     private void UpdateBulletUI()

@@ -31,6 +31,7 @@ public class TitleSceneController : MonoBehaviour
     public void LoadGameScene()
     {
         SceneManager.LoadScene(1);
+        GameManager.Instance.Run();
     }
 
 }

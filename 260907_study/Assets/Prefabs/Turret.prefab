@@ -295,7 +295,7 @@ MonoBehaviour:
   _headTransform: {fileID: 8857822470362533698}
   _muzzlePoint: {fileID: 3595866394632150265}
   _bulletPrefab: {fileID: 3497477360902950055, guid: 2a041d3d46ee5f04c96f4bd1a21e0b93, type: 3}
-  _bulletDamage: 10
+  _bulletDamage: 50
   _bulletSpeed: 4
   _bulletDestroyDelay: 5
 --- !u!1 &5391163581664625552
