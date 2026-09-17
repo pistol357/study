@@ -61,7 +61,6 @@ public class PlayerWeapon : MonoBehaviour
 
     public void Fire()
     {
-        _aimAnim.SetBool("IsAim", false);
         if (!_isReadyToFire || !_isPressedFire) return;
         if (HasBullet.Value <= 0)
         {
