@@ -14,6 +14,7 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private FlameEffect _flameEffect;
     [SerializeField] private FlameEffect _bulletImpactEffectPrefab;
 
+    private Animator _aimAnim;
     public ObservableProperty<int> HasBullet = new(0);
     private Transform _cameraTransform;
     private bool _isPressedFire => Input.GetKey(_fireKey);
@@ -60,12 +61,14 @@ public class PlayerWeapon : MonoBehaviour
 
     public void Fire()
     {
+        _aimAnim.SetBool("IsAim", false);
         if (!_isReadyToFire || !_isPressedFire) return;
         if (HasBullet.Value <= 0)
         {
             return;
         }
 
+        _aimAnim.SetBool("IsAim", true);
         _currentCooldown = 0f;
         HasBullet.Value--;
         PlayFlameEffect();
@@ -115,7 +118,11 @@ public class PlayerWeapon : MonoBehaviour
         return damageable;
     }
 
-    private void CacheComponents() => _cameraTransform = Camera.main.transform;
+    private void CacheComponents()
+    {
+        _cameraTransform = Camera.main.transform;
+        _aimAnim = GetComponentInChildren<Animator>();
+    }
 
     private void Init() => Reload();
 }
