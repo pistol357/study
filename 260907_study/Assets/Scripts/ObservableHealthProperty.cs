@@ -37,7 +37,7 @@ public class ObservablHealthProperty
         {
             _maxValue = value;
 
-            if (_maxValue < _value) _maxValue = value;
+            if (_maxValue < _value) _value = value;
         }
     }
 

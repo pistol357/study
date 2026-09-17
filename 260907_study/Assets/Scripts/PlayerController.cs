@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
 
     private void Update()
     {
+        GameOver();
         _movement.Jump();
         _movement.Rotate();
         _weapon.Fire();
@@ -183,10 +184,14 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
 
     private void GameOver()
     {
+        if (Hp.Value > 0) return;
+
+        GameManager.Instance.GameOver?.Invoke();
     }
 
     private void Init()
     {
+        Hp.MaxValue = _maxHp;
         Hp.Value = _maxHp;
     }
 }

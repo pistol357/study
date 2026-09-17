@@ -27,6 +27,7 @@ public class PlayerUIController : MonoBehaviour
         _weapon.HasBullet.AddListener(UpdateBulletUI);
         _grenade.HasGrenadeCount.AddListener(UpdateGrenadeCountUI);
         _grenade.ThrowPower.AddListener(UpdateGrenadeChargeUI);
+        GameManager.Instance.GameOver += ShowGameOverUI;
     }
 
     private void UpdateHpUI()

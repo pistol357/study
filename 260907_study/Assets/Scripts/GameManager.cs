@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,9 +8,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public Action GameOver;
     public bool IsGameRunning { get; private set; }
 
     private void Awake() => SetSingleton();
+
+    private void OnEnable() => BindGameOverEvent();
+
+    private void OnDisable() => UnbindGameOverEvent();
 
     public void Run()
     {
@@ -37,9 +43,14 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
     }
 
-    public void GameOver()
+    private void BindGameOverEvent()
     {
-        Stop();
+        GameOver += Stop;
+    }
+
+    private void UnbindGameOverEvent()
+    {
+        GameOver -= Stop;
     }
 
     private void SetSingleton()
