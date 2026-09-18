@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
     public Action GameOver;
     public bool IsGameRunning { get; private set; }
 
+    // -----------------------------------------------
     private void Awake() => SetSingleton();
-
     private void OnEnable() => BindGameOverEvent();
-
     private void OnDisable() => UnbindGameOverEvent();
+    // -----------------------------------------------
 
     public void Run()
     {
@@ -57,11 +57,11 @@ public class GameManager : MonoBehaviour
     {
         if(Instance != null && Instance != this)
         {
-            Destroy(Instance);
+            Destroy(gameObject);
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(Instance);
+        DontDestroyOnLoad(gameObject);
     }
 }
