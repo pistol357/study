@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour, IInteractor, IDamageable
         GameOver();
         _movement.Jump();
         _movement.Rotate();
+        _weapon.Aim();
         _weapon.Fire();
         _grenade.ThrowReady();
         _grenade.ThrowGrenade();

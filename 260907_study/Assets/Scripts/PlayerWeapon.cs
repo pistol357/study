@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] private KeyCode _fireKey = KeyCode.Mouse0;
+    [SerializeField] private KeyCode _aimKey = KeyCode.Mouse1;
     [SerializeField] private KeyCode _reloadKey = KeyCode.R;
     [SerializeField] private float _range;
     [SerializeField] private int _damage;
@@ -18,6 +19,7 @@ public class PlayerWeapon : MonoBehaviour
     public ObservableProperty<int> HasBullet = new(0);
     private Transform _cameraTransform;
     private bool _isPressedFire => Input.GetKey(_fireKey);
+    private bool _isPressedAim => Input.GetKey(_aimKey);
     private bool _isPressedReload => Input.GetKey(_reloadKey);
     private float _currentCooldown;
     private float _cooldownBonus = 0;
@@ -61,13 +63,8 @@ public class PlayerWeapon : MonoBehaviour
 
     public void Fire()
     {
-        if (!_isReadyToFire || !_isPressedFire) return;
-        if (HasBullet.Value <= 0)
-        {
-            return;
-        }
+        if (!_isReadyToFire || !_isPressedFire || !_isPressedAim || HasBullet.Value <= 0) return;
 
-        _aimAnim.SetBool("IsAim", true);
         _currentCooldown = 0f;
         HasBullet.Value--;
         PlayFlameEffect();
@@ -77,6 +74,17 @@ public class PlayerWeapon : MonoBehaviour
         if (damageable == null) return;
 
         damageable.TakeDamage(_damage);
+    }
+
+    public void Aim()
+    {
+        if (!_isPressedAim)
+        {
+            _aimAnim.SetBool("IsAim", false);
+            return;
+        }
+
+        _aimAnim.SetBool("IsAim", true);
     }
 
     private void PlayFlameEffect()
