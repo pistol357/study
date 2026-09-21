@@ -27,12 +27,14 @@ public class MyList<T>
         _items = new T[capacity];
     }
 
+    // O(1) - 인덱스로 칸 하나에 접근하므로 n을 적지 않습니다.
     public T Get(int index)
     {
         // index 칸의 값을 돌려줍니다.  
         return _items[index];
     }
 
+    // O(1) - 인덱스로 칸 하나에 접근하므로 n을 적지 않습니다.
     public void Set(int index, T value)
     {
         // index 칸에 value를 넣습니다.  
@@ -56,6 +58,7 @@ public class MyList<T>
         return text;
     }
 
+    // O(n) - n은 Count
     public void Add(T value)
     {
         // 칸이 다 찼으면 먼저 칸을 늘립니다.  
@@ -66,6 +69,7 @@ public class MyList<T>
         _count++;
     }
 
+    // O(n) - n은 Count
     public void Insert(int index, T value)
     {
         // 칸이 다 찼으면 먼저 칸을 늘립니다.  
@@ -81,6 +85,7 @@ public class MyList<T>
         _count++;
     }
 
+    // O(n) - n은 Count
     private void GrowIfFull()
     {
         // 개수가 칸 수보다 작으면 아무것도 하지 않고 돌아갑니다.  
@@ -98,7 +103,7 @@ public class MyList<T>
         // 새 칸 수만큼의 배열을 새로 만듭니다.  
         T[] newArray = new T[newCapacity];
         // 담긴 요소를 앞에서부터 새 배열의 같은 번호 칸에 옮겨 담습니다.  
-        for(int i = 0; i < Capacity; i++)
+        for(int i = 0; i < Count; i++)
         {
             newArray[i] = _items[i];
         }
@@ -106,6 +111,7 @@ public class MyList<T>
         _items = newArray;
     }
 
+    // O(n) - n은 Count
     public int IndexOf(T value)
     {
         // 0번 칸부터 개수 직전 칸까지 앞에서부터 차례로 돕니다.  
@@ -118,6 +124,7 @@ public class MyList<T>
         return -1;
     }
 
+    // O(n) - n은 Count
     public bool Contains(T value)
     {
         // value가 몇 번 자리에 있는지 찾습니다.  
@@ -126,6 +133,7 @@ public class MyList<T>
         return index >= 0;
     }
 
+    // O(n) - n은 Count - index
     public void RemoveAt(int index)
     {
         // index 다음 요소부터 맨 끝 요소까지, 앞에서부터 돌며 한 칸씩 앞으로 옮깁니다.  
@@ -139,6 +147,7 @@ public class MyList<T>
         _items[Count] = default(T);
     }
 
+    // O(n) - n은 Count
     public bool Remove(T value)
     {
         // value가 몇 번 자리에 있는지 찾습니다.  
@@ -150,6 +159,7 @@ public class MyList<T>
         return true;
     }
 
+    // O(n) - n은 Count
     public void Clear()
     {
         // 0번 칸부터 개수 직전 칸까지 차례로 돌며 기본값으로 바꿉니다.  
