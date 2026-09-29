@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Tool : MonoBehaviour
 {
-    private float _coolTime;
-    private float _currentCool;
+    public int Weight { get; private set; }
 
-    private void Interact()
+    private WaitForSeconds _wait = new WaitForSeconds(0.3f);
+
+    public IEnumerator WaitUseRoutine()
+    {
+        yield return _wait;
+        TryUse();
+    }
+
+    public void TryUse()
     {
 
     }
 
-    private void UpdateCurrentCool()
+    public void Interact()
     {
 
     }
