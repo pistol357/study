@@ -6,18 +6,19 @@ public class DetectRange : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other is IInteractable)
+        IInteractable interactable = other.GetComponent<IInteractable>();
+        if (interactable != null)
         {
-            Debug.Log("hi");
-            (other as IInteractable).Selected();
+            interactable.Selected();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other is IInteractable)
+        IInteractable interactable = other.GetComponent<IInteractable>();
+        if (interactable != null)
         {
-            (other as IInteractable).Unselected();
+            interactable.Unselected();
         }
     }
 }

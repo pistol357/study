@@ -11,10 +11,6 @@ public class Tool : MonoBehaviour, IInteractable
     private Outline _outline;
     private WaitForSeconds _wait = new WaitForSeconds(0.3f);
 
-    // ------------------------------
-    private void Awake() => CacheComponents();
-    private void Start() => Init();
-    // ------------------------------
 
     public IEnumerator WaitUseRoutine()
     {
@@ -34,21 +30,11 @@ public class Tool : MonoBehaviour, IInteractable
 
     public void Selected()
     {
-        _outline.enabled = true;
+        Debug.Log($"{this.name} Selected");
     }
 
     public void Unselected()
     {
-        _outline.enabled = false;
-    }
-
-    private void CacheComponents()
-    {
-        _outline = GetComponentInChildren<Outline>();
-    }
-
-    private void Init()
-    {
-        _outline.enabled = false;
+        Debug.Log($"{this.name} Unselected");
     }
 }
