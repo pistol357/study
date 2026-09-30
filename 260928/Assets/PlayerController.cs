@@ -6,20 +6,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     const int HAND_CAPACITY = 3;
-    const float BASE_MOVE_SPEED = 5f;
 
     private PlayerAction _player;
     private Vector3 _direction;
-    private float _moveSpeed;
     private GameObject _pickedItem;
     private int _pickedQuantity;
+    private DetectRange _detectRange;
 
     private KeyCode _dashKey = KeyCode.LeftShift;
     private bool _isDashKeyPressed => Input.GetKeyDown(_dashKey);
 
     // ------------------------------
     private void Awake() => CacheComponents();
-    private void Start() => Init();
     private void Update()
     {
         ReadMove();
@@ -27,7 +25,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _player.Move(_direction, _moveSpeed);
+        _player.Move(_direction);
     }
     // ------------------------------
 
@@ -46,13 +44,14 @@ public class PlayerController : MonoBehaviour
         _player.Dash();
     }
 
+    private void Detect()
+    {
+        
+    }
+
     private void CacheComponents()
     {
         _player = GetComponent<PlayerAction>();
-    }
-
-    private void Init()
-    {
-        _moveSpeed = BASE_MOVE_SPEED;
+        _detectRange = GetComponentInChildren<DetectRange>();
     }
 }
