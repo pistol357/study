@@ -4,7 +4,11 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public void Selected();
-    public void Unselected();
+    public GameObject GameObject { get; }
+
+    public void Detected();
+    public void Undetected();
+    public void Select();
+    public void Unselect();
     public void Interact();
 }

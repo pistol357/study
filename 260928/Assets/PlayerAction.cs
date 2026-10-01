@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
-    const float BASE_MOVE_SPEED = 5f;
-    const float DASH_SPEED_BONUS = 4f;
+    private const float BASE_MOVE_SPEED = 5f;
+    private const float DASH_SPEED_BONUS = 4f;
 
     private Rigidbody _playerBody;
     private float _moveSpeed;
