@@ -86,27 +86,23 @@ public class PlayerController : MonoBehaviour
         {
             if (_canTargetDict[_canTargetList[i]] > targetLookPercentage)
             {
+                Vector3 toTargetDirection = (target.GameObject.transform.position - transform.position);
+                Ray ray = new Ray(transform.position, toTargetDirection);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, _detectRange.Range))
+                {
+                    if (hit.transform.GetComponent<IInteractable>() == target)
+                    {
+                        _target.Select();
+                    }
+                }
+
                 target = _canTargetList[i];
                 targetLookPercentage = _canTargetDict[_canTargetList[i]];
             }
         }
-        if (_target != target)
-        {
-            _target.Unselect();
-            _target = target;
-        }
-
-        Vector3 toTargetDirection = (_target.GameObject.transform.position - transform.position);
-        Ray ray = new Ray(transform.position, toTargetDirection);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, _detectRange.Range))
-        {
-            if(hit.transform.GetComponent<IInteractable>() == _target)
-            {
-                _target.Select();
-            }
-        }
+        if (_target != target) _target = target;
     }
 
     private void CacheComponents()
