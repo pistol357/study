@@ -3,19 +3,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerMover : MonoBehaviour
 {
-    private Vector2 _moveInput;
-    private MyInputActions _inputActions;
     [SerializeField] private InputActionReference _moveInputAction;
-
-    private void Awake()
-    {
-        _inputActions = new MyInputActions();
-    }
+    [SerializeField] private Vector2 _moveInput;
 
     private void OnEnable()
     {
         _moveInputAction.action.Enable();
         _moveInputAction.action.performed += OnMove;
+        _moveInputAction.action.canceled += OnMoveStop;
     }
 
     public void OnMove(InputAction.CallbackContext context)
