@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyTableParser : MonoBehaviour
 {
     [SerializeField] private TextAsset _csvFile;
 
-    private Dictionary<int, EnemyData> _enemyDatas = new();
+    // private Dictionary<int, EnemyData> _enemyDatas = new();
+    [SerializeField] private List<MonsterStats> _monsterStatsList = new();
 
     private void Awake() => LoadTable();
 
@@ -16,10 +18,12 @@ public class EnemyTableParser : MonoBehaviour
     /// <param name="id">고유 키 값</param>
     /// <param name="data">찾은 적 데이터</param>
     /// <returns></returns>
+    /*
     public bool TryGetEnemy(int id, out EnemyData data)
     {
         return _enemyDatas.TryGetValue(id, out data);
     }
+    */
 
     private void LoadTable()
     {
@@ -57,7 +61,7 @@ public class EnemyTableParser : MonoBehaviour
 
             name = cells[1];
 
-            _enemyDatas[id] = new EnemyData(id, name, maxHp, detectRange, attackRange, speed, attackValue);
+            _monsterStatsList[i - 2].SetData(id, name, maxHp, detectRange, attackRange, speed, attackValue);
         }
     }
 }

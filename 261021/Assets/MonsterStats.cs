@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 
-[Serializable]
-public class EnemyData
+[CreateAssetMenu(fileName = "MonsterStats", menuName = "Data/MonsterStats")]
+public class MonsterStats : ScriptableObject
 {
     [SerializeField] private int _id;
     [SerializeField] private string _name;
@@ -20,7 +19,7 @@ public class EnemyData
     public float Speed => _speed;
     public int AttackValue => _attackValue;
 
-    public EnemyData(int id, string name, int maxHp, float detectRange, float attackRange, float speed, int attackValue)
+    public void SetData(int id, string name, int maxHp, float detectRange, float attackRange, float speed, int attackValue)
     {
         _id = id;
         _name = name;
