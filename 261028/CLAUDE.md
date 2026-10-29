@@ -1,6 +1,7 @@
 # 프로젝트 지침
 
 > 이 파일은 매 세션 읽히는 허브 역할을 한다.
+>  
 > 모든 규칙을 여기 적지 않고, 매 세션 필요한 문서만 `@` 로 불러오고, 나머지는 아래 온디맨드 참조 표를 보고 그 작업을 할 때만 읽는다.
 
 ---
@@ -21,11 +22,16 @@
 
 ## 상시 로드 (매 세션 적용)
 
-- @Docs\Claude\ClaudeCodeRules.md
-- @Docs\TechSpec.md
+@Docs\Claude\ClaudeCodeRules.md
+@Docs\Claude\WorkflowRules.md
+@Docs\TechSpec.md
 
 ## 온디맨드 참조 (매 세션 읽지 않음 - 해당 작업을 할 때만 읽음)
 
 ### 소스코드 작성 시
 
-- @Docs\Code\CodeConvention.md
+`@Docs\Code\CodeConvention.md`
+
+### Github Issue 등록 시
+
+`github-issue` 스킬을 호출해 진행한다. (규칙 문서는 스킬이 필요한 섹션만 읽음)

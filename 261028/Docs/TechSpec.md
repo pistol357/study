@@ -1,6 +1,7 @@
 # Tech Specification
 
 > 이 프로젝트의 기술 스택 관련 결정 사항이다.
+>  
 > Claude Code는 코드를 작성할 때 이 문서를 기준으로 한다.
 
 ---
