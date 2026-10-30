@@ -1,0 +1,3 @@
+Id,Name,Hp,Mp,MpRegen,MoveSpeed,Passive,Skill1Id,Skill2Id
+110001,마법사,100,50,1.5,5,마나 증폭,260001,260002
+110002,기사,150,30,0.5,4,강철 피부,260003,260004

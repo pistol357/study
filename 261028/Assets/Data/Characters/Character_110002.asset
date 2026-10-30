@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69fdd67b56cc75c499dddbb1573f8864, type: 3}
+  m_Name: Character_110002
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  _id: 110002
+  _characterName: "\uAE30\uC0AC"
+  _hp: 150
+  _mp: 30
+  _mpRegen: 0.5
+  _moveSpeed: 4
+  _passive: "\uAC15\uCCA0 \uD53C\uBD80"
+  _uniqueSkill1: {fileID: 11400000, guid: eca8cfa975fa46a4491019271e5b2861, type: 2}
+  _uniqueSkill2: {fileID: 11400000, guid: 1bb79578ec5361441b0164a7bb575be4, type: 2}
