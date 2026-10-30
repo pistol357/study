@@ -11,7 +11,7 @@ description: Github Issue 작성 및 등록 절차. 사용자가 개발(새 기�
 
 | 문서 | 경로 |
 |---|---|
-| Rule | `Docs\Documentation\Github Issue Rule.md` |
+| Rule | `Docs\Documentation\GithubIssueRule.md` |
 | Template | `Docs\Template\IssuesTemplate.md` |
 | Workflow | `Docs\Claude\WorkflowRules.md` |
 

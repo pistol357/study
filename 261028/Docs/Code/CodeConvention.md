@@ -25,3 +25,20 @@
 ## 4. 성능 규칙
 - 힙 할당(`new List`, LINQ, 문자열 조합)을 매 프레임 쓰지 않는다.
 - 최적화 제안은 "측정 방법"과 함께 말한다. 측정 없는 최적화는 권하지 않는다.
+
+## 5. 메서드 생성 규칙
+- `Awake`, `Update` 등에서 코드를 여러 줄로 나열하지 않고 목적이 같은 코드를 하나의 메서드로 묶어 다룬다.
+- 예시 :
+  ```Csharp
+  private void FixedUpdate()
+  {
+    Move();
+  }
+
+  private void Move()
+  {
+    Vector2 direction = _moveAction.action.ReadValue<Vector2>().normalized;
+
+    _rigidbody.linearVelocity = direction * _moveSpeed;
+  }
+  ```
