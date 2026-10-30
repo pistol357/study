@@ -32,6 +32,10 @@
 
 `@Docs\Code\CodeConvention.md`
 
+### 게임 데이터(CSV, ScriptableObject) 작업 시
+
+`@Docs\Code\DataPipeline.md`
+
 ### Github Issue 등록 시
 
 `github-issue` 스킬을 호출해 진행한다. (규칙 문서는 스킬이 필요한 섹션만 읽음)

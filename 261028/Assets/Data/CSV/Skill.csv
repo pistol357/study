@@ -1,0 +1,6 @@
+Id,Type,Name,Icon,Description,Cooldown
+260001,Attack,샷,Assets/Sprites/Skills/Shot.png,"전방으로 탄환을 발사한다, 가장 가까운 적을 노린다",1.5
+260002,Disrupt,슬로우,,주변 적의 이동 속도를 낮춘다,5
+260003,Move,대시,,바라보는 방향으로 빠르게 이동한다,5
+260004,Support,힐,,체력을 회복한다,10
+210001,Attack,매직 미사일,,가까운 적에게 마력탄을 날린다,2
