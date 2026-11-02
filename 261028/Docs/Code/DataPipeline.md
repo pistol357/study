@@ -8,7 +8,8 @@
 
 - 원본은 구글 시트로 한다. 데이터 수정은 구글 시트에서만 한다.
 - 흐름 : 구글 시트 → CSV 다운로드(`파일 > 다운로드 > CSV`) → `Assets/Data/CSV/`에 덮어쓰기 → 메뉴 `Tools > Data > Import CSV` 실행 → ScriptableObject 에셋 생성/갱신
-- 변환 순서는 스킬 → 캐릭터다. 캐릭터가 스킬 Id로 고유 마법을 찾기 때문이다.
+- 변환 순서는 스킬 → 캐릭터 → 목록 에셋이다. 캐릭터가 스킬 Id로 고유 마법을 찾기 때문이다.
+- 목록 에셋(`GameDatabase`)은 변환할 때마다 CSV에 있는 캐릭터/스킬로 다시 채운다. 런타임에서 전체 목록이 필요하면 이 에셋을 참조한다.
 
 ## 2. 파일 위치
 
@@ -17,6 +18,7 @@
 | CSV | `Assets/Data/CSV/Skill.csv`, `Assets/Data/CSV/Character.csv` |
 | 스킬 에셋 | `Assets/Data/Skills/Skill_{Id}.asset` |
 | 캐릭터 에셋 | `Assets/Data/Characters/Character_{Id}.asset` |
+| 목록 에셋 | `Assets/Data/GameDatabase.asset` |
 | 변환 스크립트 | `Assets/Scripts/Editor/DataImporter.cs` |
 
 ## 3. Id 규칙
@@ -50,6 +52,7 @@
 | Id 규칙에 따른 정수 | `Attack` / `Support` / `Disrupt` / `Move` | 문자열 | Sprite 경로(비워도 됨) | 문자열 | 소수 |
 
 - `Type`은 `SkillType` enum 이름과 대소문자까지 똑같이 적는다.
+- 화면에는 `SkillType.ToDisplayName()`의 한글 이름으로 표시된다. enum 값을 추가하면 이 메서드의 표시 이름도 함께 추가한다.
 - `Icon` 이미지는 Texture Type `Sprite (2D and UI)`, Sprite Mode `Single`로 설정한다.
 
 ### Character.csv

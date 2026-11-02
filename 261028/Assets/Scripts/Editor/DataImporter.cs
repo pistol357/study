@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// 구글 시트에서 받은 CSV를 읽어 SkillData, CharacterData 에셋을 생성하거나 갱신한다.
+/// 구글 시트에서 받은 CSV를 읽어 SkillData, CharacterData, GameDatabase 에셋을 생성하거나 갱신한다.
 /// </summary>
 public static class DataImporter
 {
@@ -16,13 +16,15 @@ public static class DataImporter
     private const string DATA_FOLDER = "Assets/Data";
     private const string SKILL_FOLDER_NAME = "Skills";
     private const string CHARACTER_FOLDER_NAME = "Characters";
+    private const string DATABASE_PATH = "Assets/Data/GameDatabase.asset";
 
     [MenuItem("Tools/Data/Import CSV")]
     private static void ImportAll()
     {
         // 캐릭터가 고유 마법을 스킬 Id로 찾기 때문에 스킬을 먼저 변환한다.
         Dictionary<int, SkillData> skills = ImportSkills();
-        ImportCharacters(skills);
+        List<CharacterData> characters = ImportCharacters(skills);
+        UpdateDatabase(characters, skills);
 
         AssetDatabase.SaveAssets();
         Debug.Log("CSV 변환 완료");
@@ -50,9 +52,10 @@ public static class DataImporter
         return skills;
     }
 
-    private static void ImportCharacters(Dictionary<int, SkillData> skills)
+    private static List<CharacterData> ImportCharacters(Dictionary<int, SkillData> skills)
     {
         string folder = EnsureFolder(CHARACTER_FOLDER_NAME);
+        List<CharacterData> characters = new List<CharacterData>();
 
         foreach (List<string> row in ReadRows(CHARACTER_CSV_PATH))
         {
@@ -67,7 +70,19 @@ public static class DataImporter
             CharacterData character = LoadOrCreate<CharacterData>($"{folder}/Character_{id}.asset");
             character.SetData(id, row[1], hp, mp, mpRegen, moveSpeed, row[6], uniqueSkill1, uniqueSkill2);
             EditorUtility.SetDirty(character);
+
+            characters.Add(character);
         }
+
+        return characters;
+    }
+
+    // CSV에 있는 에셋만 담기 때문에, 시트에서 지운 데이터는 목록에서도 빠진다.
+    private static void UpdateDatabase(List<CharacterData> characters, Dictionary<int, SkillData> skills)
+    {
+        GameDatabase database = LoadOrCreate<GameDatabase>(DATABASE_PATH);
+        database.SetData(characters.ToArray(), new List<SkillData>(skills.Values).ToArray());
+        EditorUtility.SetDirty(database);
     }
 
     // 기존 에셋을 지우지 않고 재사용해야, 이 에셋을 참조하던 곳의 연결이 끊기지 않는다.
