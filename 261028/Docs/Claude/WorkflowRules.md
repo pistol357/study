@@ -151,6 +151,7 @@ flowchart TD
 
 ## 9. PR 생성
 
+- `github-pr` 스킬을 호출해 진행한다.
 - PR 본문은 `@Docs\Template\PRTemplate.md`의 형식으로 작성한다.
 - PR 제목은 커밋 메시지와 같은 `[커밋 태그] 작업 요약` 형식으로 작성한다.
 - base 브랜치는 `main`으로 한다. (`Develop` 브랜치 도입 시 이 항목을 갱신한다.)
