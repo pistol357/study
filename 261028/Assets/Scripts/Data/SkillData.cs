@@ -18,6 +18,8 @@ public class SkillData : ScriptableObject
     public Sprite Icon => _icon;
     public string Description => _description;
     public float Cooldown => _cooldown;
+    // Id 규칙(TUNNNN)에서 U 자리가 6~9면 고유 마법이다.
+    public bool IsUnique => _id / 10000 % 10 >= 6;
 
     /// <summary>
     /// CSV 변환 시 값을 한 번에 덮어쓴다.

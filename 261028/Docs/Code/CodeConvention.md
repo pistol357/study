@@ -33,6 +33,7 @@
   private void FixedUpdate()
   {
     Move();
+    Jump();
   }
 
   private void Move()
